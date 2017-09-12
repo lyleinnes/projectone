@@ -1,0 +1,22 @@
+header {
+  color: red;
+}
+
+.board-wrapper {
+  background-color: black;
+  box-sizing: border-box;
+  width: 450px;
+  height: 450px;
+  padding-left: 11px;
+  padding-top: 5px;
+  margin: none;
+}
+
+.board-wrapper>* {
+  vertical-align: top;
+  min-width: 140px;
+  min-height: 140px;
+  box-sizing: border-box;
+  display: inline-block;
+  background-color: lightblue;
+  margin-top: 5px;
