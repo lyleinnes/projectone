@@ -1,22 +1,125 @@
+@font-face {
+  font-family: 'boneFont';
+  src:
+    url('BONEAPA.TTF')
+    format('truetype');
+}
+
+body>* {
+    margin: 0 auto;
+}
+
+main {
+  width:760px;
+  margin-top: 5px;
+}
+
 header {
-  color: red;
+  background-color: grey;
+  box-sizing: border-box;
+  width: 760px;
+  height: 110px;
+  padding-left: 125px;
+  padding-right: 125px;
+  padding-top: 20px;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+header>p {
+  color: white;
+  font-size: 5em;
+  font-family: 'boneFont';
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#player-one,
+#player-two,
+.board-wrapper {
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+}
+
+
+#player-one,
+#player-two {
+  min-width: 162px;
+  min-height: 450px;
+  background-color: lightblue;
 }
 
 .board-wrapper {
   background-color: black;
-  box-sizing: border-box;
-  width: 450px;
-  height: 450px;
-  padding-left: 11px;
-  padding-top: 5px;
-  margin: none;
+  width: 428px;
+  height: 428px;
+  margin-top: 10px;
 }
 
-.board-wrapper>* {
+.board-wrapper > div {
   vertical-align: top;
   min-width: 140px;
   min-height: 140px;
   box-sizing: border-box;
   display: inline-block;
-  background-color: lightblue;
+  background-color: white;
+  margin-top: 4px;
+  cursor: pointer;
+  font-family: 'boneFont';
+  font-size: 7.5em;
+  text-align: center;
+  padding-top: 19px;
+
+}
+
+.board-wrapper > div:nth-child(-n+3) {
+  margin-top: 0;
+}
+
+.options>div {
+  display: inline-block;
+  height: 100px;
+  vertical-align: top;
+  box-sizing: border-box;
   margin-top: 5px;
+  font-family: 'boneFont';
+}
+#reset {
+  width: 150px;
+  padding-top: 35px;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-size: 2em;
+  color: white;
+  background-color: grey;
+  text-align: center;
+  cursor: pointer;
+}
+.win-message {
+  width: 451px;
+  font-size: 2.1em;
+  color: white;
+  padding: 34px 0;
+  text-align: center;
+}
+
+#meow {
+  width: 150px;
+  padding-top: 35px;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-size: 2em;
+  color: white;
+  background-color: grey;
+  text-align: center;
+  cursor: pointer;
+}
+
+.transRed {
+  transition: 2s;
+  width: 451px;
+  font-size: 2.1em;
+  color: red;
+  padding: 34px 0;
+  text-align: center;
+}
