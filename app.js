@@ -28,6 +28,7 @@ board.addEventListener("click", function(event) {
     event.target.textContent = currentPlayer;
     activeBoard[index] = currentPlayer;
     winCombos.forEach(newWinCheck); // -- peow peow --
+    newDrawAlert();
     turn ++;
   }
 });
@@ -49,11 +50,16 @@ var newWinCheck = function (array) {
   }
   if (activeBoard[array[0]] === activeBoard[array[1]] && activeBoard[array[0]] === activeBoard[array[2]]) {
     winMessage.textContent = playerNum + " wins";
-    winMessage.className = "transRed";
+    winMessage.classList.toggle("transRed");
     gameEnd = true;
-  } else if (turn === 8 && gameEnd === false) {
+  } 
+};
+
+// --- nu drawCheck hu dis? ---
+var newDrawAlert = function () {
+  if (turn === 8 && gameEnd === false) {
     winMessage.textContent = "draw";
-    winMessage.className = "transRed";
+    winMessage.classList.toggle("transRed");
   }
 };
 
@@ -61,10 +67,12 @@ var newWinCheck = function (array) {
 var resetGame = function() {
   turn = 0;
   gameEnd = false;
-  activeBoard = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+  activeBoard = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
   children.forEach(function(child){
     child.textContent = " ";
-  })
-  winMessage.textContent = "";
-  winMessage.className = "win-message";
-}
+  });
+  winMessage.classList.toggle("transRed");
+  setTimeout(function() {
+    winMessage.textContent = " ";
+  }, 2000)
+};
