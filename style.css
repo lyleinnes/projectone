@@ -1,21 +1,199 @@
 @font-face {
-  font-family: 'boneFont';
+  font-family: 'samurai';
   src:
-    url('BONEAPA.TTF')
+    url('ZinHenaBokuryu-CRF.ttf')
     format('truetype');
 }
 
-body>* {
+body {
+  width: 720px;
+  height: 800px;
+  margin: 10px auto;
+}
+
+header {
+  background: url('finalHeadBG.png');
+  background-size: cover;
+  box-sizing: border-box;
+  width: 100%;
+  height: 10%;
+  font-size: 4em;
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: 'samurai';
+  padding-top: 1%;
+  border: 3px solid black;
+  border-radius: 5px;
+}
+header > p {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: white;
+  text-shadow:
+  0 0 5px #830303,
+  2px 2px 5px #830303,
+  2px -2px 5px #830303,
+  -2px 2px 5px #830303,
+  -2px -2px 5px #830303;
+}
+
+main {
+  background: url('finalMainBG.png');
+  background-size: cover;
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: 89%;
+  border: 3px solid black;
+  border-radius: 5px;
+}
+
+.options {
+  background: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  position: relative;
+  text-align: center;
+  font-size: 2.2em;
+  width: 100%;
+  height: 10%;
+  font-family: 'samurai';
+  color: white;
+}
+#reset {
+  box-sizing: border-box;
+  width: 20%;
+  height: 100%;
+  display: inline-block;
+  position: absolute;
+  left: 0.5%;
+  top: 0;
+  padding-top: 1.7%;
+  cursor: pointer;
+}
+#reset:hover {
+    text-shadow:
+    0 0 5px #3fc401,
+    5px 5px 5px #3fc401,
+    5px -5px 5px #3fc401,
+    -5px 5px 5px #3fc401,
+    -5px -5px 5px #3fc401;
+}
+.win-message {
+  box-sizing: border-box;
+  display: inline-block;  
+  width: 55%;
+  height: 100%;
+  position: absolute;
+  left: 22.5%;
+  top: 0;
+  padding-top: 1.7%;
+  opacity: 0;
+  transition: opacity 1s linear;
+}
+.unhide {
+  opacity: 1;
+}
+
+#meow {
+  box-sizing: border-box;
+  width: 20%;
+  height: 100%;
+  display: inline-block;
+  position: absolute;
+  right: 0.5%;
+  top: 0;
+  padding-top: 1.7%;
+  cursor: pointer;
+}
+
+
+#player-one,
+#player-two {
+  box-sizing: border-box;
+  display: inline-block;
+  position: absolute;
+  vertical-align: top;
+  height: 90%;
+  width: 20%;
+}
+#player-two {
+  right: 0;
+}
+.player-one-char,
+.player-two-char {
+  text-align: center;
+  color: white;
+  font-family: 'samurai';
+  font-size: 7em;
+  transition: .7s;
+}
+img {
+  width: 130%;
+  position: absolute;
+  bottom: 0;
+}
+#player-two > img {
+  right: 0;
+}
+
+.board-wrapper {
+  box-sizing: border-box;
+  display: inline-block;
+  position: absolute;
+  margin-top: 2%;
+  left: 22.5%;
+  height: 90%;
+  width: 55%;
+}
+
+.board-wrapper > div {
+  box-sizing: border-box;
+  display: inline-block;
+  margin-left: 2.2%;
+  margin-top: 2.2%;
+  width: 30%;
+  height: 18.54%;
+  font-family: 'samurai';
+  font-size: 6em;
+  text-align: center;
+  vertical-align: bottom;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  cursor: pointer;
+/*  font-opacity: 0;
+  transition: font-opacity 1s linear;*/
+}
+
+.glow {
+  text-shadow:
+    0 0 5px #3fc401,
+    5px 5px 5px #3fc401,
+    5px -5px 5px #3fc401,
+    -5px 5px 5px #3fc401,
+    -5px -5px 5px #3fc401;
+}
+
+
+
+/*
+body>header,
+body>main,
+body>footer {
     margin: 0 auto;
 }
 
 main {
   width:760px;
-  margin-top: 5px;
+  margin-top: 20px;
+  background-image: url("mainBG.png");
+  background-size: 100%;
+  border: 2px solid black;
+  border-radius: 10px;
 }
 
 header {
-  background-color: grey;
+  background-image: url("headerBG.png");
+  background-size: 100%;
   box-sizing: border-box;
   width: 760px;
   height: 110px;
@@ -24,6 +202,7 @@ header {
   padding-top: 20px;
   border: 2px solid black;
   border-radius: 10px;
+  margin-bottom: 5px;
 }
 header>p {
   color: white;
@@ -46,8 +225,7 @@ header>p {
 #player-two {
   max-width: 162px;
   min-height: 450px;
-/*  background-color: lightblue;
-*/}
+}
 .player-one-num,
 .player-two-num {
   font-family: 'boneFont';
@@ -59,7 +237,7 @@ header>p {
 }
 
 .board-wrapper {
-  background-color: black;
+  background-color: transparent;
   width: 428px;
   height: 428px;
   margin-top: 10px;
@@ -71,13 +249,15 @@ header>p {
   min-height: 140px;
   box-sizing: border-box;
   display: inline-block;
-  background-color: white;
+  background-color: rgba(0,0,0,0.2);
   margin-top: 4px;
   cursor: pointer;
   font-family: 'boneFont';
-  font-size: 7.5em;
+  font-size: 7em;
   text-align: center;
   padding-top: 19px;
+  border: 3px solid rgba(0,0,0,0.5);
+  border-radius: 10px;
 
 }
 
@@ -85,7 +265,7 @@ header>p {
   margin-top: 0;
 }
 
-.options>div {
+.options > div {
   display: inline-block;
   height: 100px;
   vertical-align: top;
@@ -100,17 +280,21 @@ header>p {
   border-radius: 10px;
   font-size: 2em;
   color: white;
-  background-color: grey;
+  background-color: rgba(0,0,0,0);
   text-align: center;
   cursor: pointer;
 }
 .win-message {
-  transition: 2s;
+  color: white;
+  opacity: 0;
+  transition: opacity 1s linear;
   width: 451px;
   font-size: 2.1em;
-  color: white;
   padding: 34px 0;
   text-align: center;
+}
+.unhide {
+  opacity: 1;
 }
 
 #meow {
@@ -120,28 +304,19 @@ header>p {
   border-radius: 10px;
   font-size: 2em;
   color: white;
-  background-color: grey;
+  background-color: rgba(0,0,0,0);
   text-align: center;
   cursor: pointer;
 }
 
-.transRed {
-  transition: 2s;
-  width: 451px;
-  font-size: 2.1em;
-  color: #830303;
-  padding: 34px 0;
-  text-align: center;
-}
-.glowRed {
-  /*color: red;*/
-  /*background: radial-gradient(rgba(255,0,0,1) 20%, rgba(255,0,0,0) 60%);*/
-  text-shadow: 0 0 10px #830303, 2px 2px 10px #830303, -2px 2px 10px #830303, -2px -2px 10px #830303, 2px -2px 10px #830303;
+.glow {
+  text-shadow: 0 0 10px #32d10e, 2px 2px 10px #32d10e, -2px 2px 10px #32d10e, -2px -2px 10px #32d10e, 2px -2px 10px #32d10e;
 }
 
 #player-one>img,
 #player-two>img {
   display: inline-block;
   width: 100%;
-  vertical-align: bottom;
+  padding-top: 30px;
 }
+*/

@@ -5,17 +5,26 @@
   <title>Tic Tac Toe</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
   <header>
-    <p>tic tac toe</h1>
+    <p>TIC TAC TOE</p>
   </header>
 
   <main>
+
+    <div class="options">
+      <div id="reset">reset</div>
+      <div class="win-message"></div>
+      <div id="meow">meow</div>
+    </div>
+
     <div id="player-one">
-      <div class="player-one-num">
-        pi
+      <div class="player-one-char">
+        x
       </div>
-      <img src="playerOne.png" alt="player two char">
+      <img src="playerOne.png" alt="player one avatar">
     </div>
 
     <div class="board-wrapper">
@@ -31,23 +40,17 @@
     </div>
 
     <div id="player-two">
-      <div class="player-two-num">
-        pii
+      <div class="player-two-char">
+        o
       </div>
-      <img src="playerTwo.png" alt="player two char">
+      <img src="playerTwo.png" alt="player two avatar">
     </div>
 
-    <div class="options">
-      <div id="reset">reset</div>
-      <div class="win-message"></div>
-      <div id="meow">meow</div>
-    </div>
-    
   </main>
-
+<!-- 
   <footer>
     
-  </footer>
+  </footer> -->
   
 
   <script src="app.js"></script>
