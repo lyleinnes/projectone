@@ -5,7 +5,8 @@ var playerOne = "x";
 var playerTwo = "o";
 var turn = 0;
 var gameEnd = false;
-var activeBoard = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+var kitty = false;
+var activeBoard = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
 var winCombos = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [6, 4, 2]]; 
 var currentPlayer;
 var startInt;
@@ -30,8 +31,8 @@ board.addEventListener("click", function(event) {
     event.target.textContent = currentPlayer;
     activeBoard[index] = currentPlayer;
     winCombos.forEach(newWinCheck); // -- peow peow --
-    newDrawAlert();
     turn ++;
+    newDrawAlert();
     clearInterval(startInt);
     glowOrNoGlow();
   }
@@ -43,7 +44,9 @@ resetButton.addEventListener("click", function() {
 })
 
 // --- this event listener executes operation kitty ---
-
+meowButton.addEventListener("click", function() {
+  crazyCat();
+});
 
 // --- newWinCheck function ---
 var newWinCheck = function (array) {
@@ -52,7 +55,7 @@ var newWinCheck = function (array) {
   } else {
     playerNum = "player two";
   }
-  if (activeBoard[array[0]] === activeBoard[array[1]] && activeBoard[array[0]] === activeBoard[array[2]]) {
+  if (activeBoard[array[0]] === activeBoard[array[1]] && activeBoard[array[0]] === activeBoard[array[2]] && gameEnd === false) {
     winMessage.textContent = playerNum + " wins";
     winMessage.classList.toggle("unhide");
     gameEnd = true;
@@ -61,7 +64,7 @@ var newWinCheck = function (array) {
 
 // --- nu drawCheck hu dis? ---
 var newDrawAlert = function () {
-  if (turn === 8 && gameEnd === false) {
+  if (turn === 9 && gameEnd === false) {
     winMessage.textContent = "draw";
     winMessage.classList.toggle("unhide");
     gameEnd = true;
@@ -78,10 +81,34 @@ var resetGame = function() {
   });
   clearInterval(startInt);
   glowOrNoGlow();
+  kitty = false;
   if (winMessage.classList.value === "win-message unhide") {
     winMessage.classList.toggle("unhide");
+    meow.currentTime=0;
   }
 };
+
+var meow = new Audio("catSound.wav");
+var catArray = [];
+// --- operation kitty ---
+var crazyCat = function() {
+  if (gameEnd === false && kitty === false) {
+    meow.play();
+    activeBoard.forEach(function(item, index) {
+      var numItem = parseInt(item);
+      if (numItem === index) {
+        catArray.push(index);
+      }
+    })
+    var randVal = catArray[Math.floor((Math.random() * catArray.length) +1)];
+    board.children[randVal].innerHTML = "<img src='cat.gif' class='fit' alt='kitty'>";
+    activeBoard[randVal] = "meow";
+    turn ++;
+    clearInterval(startInt);
+    glowOrNoGlow();
+    kitty = true;
+  }
+}
 
 // --- current player indicator ---
 var glowOrNoGlow = function() {
