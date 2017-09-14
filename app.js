@@ -8,12 +8,14 @@ var gameEnd = false;
 var activeBoard = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 var winCombos = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [6, 4, 2]]; 
 var currentPlayer;
-
+var startInt;
 // --- referencing the dom elements we need ---
 var board = document.querySelector(".board-wrapper");
 var winMessage = document.querySelector(".win-message");
 var resetButton = document.getElementById("reset");
 var meowButton = document.getElementById("meow");
+var playerOneNum = document.querySelector(".player-one-num");
+var playerTwoNum = document.querySelector(".player-two-num");
 var children = board.childNodes;
 
 // --- this event listener [which targets whichever tile the player clicks on] is essentially the game ---
@@ -30,6 +32,8 @@ board.addEventListener("click", function(event) {
     winCombos.forEach(newWinCheck); // -- peow peow --
     newDrawAlert();
     turn ++;
+    clearInterval(startInt);
+    glowOrNoGlow();
   }
 });
 
@@ -60,6 +64,7 @@ var newDrawAlert = function () {
   if (turn === 8 && gameEnd === false) {
     winMessage.textContent = "draw";
     winMessage.classList.toggle("transRed");
+    gameEnd = true;
   }
 };
 
@@ -75,4 +80,27 @@ var resetGame = function() {
   setTimeout(function() {
     winMessage.textContent = " ";
   }, 2000)
+  clearInterval(startInt);
+  glowOrNoGlow();
 };
+
+// --- current player indicator ---
+var glowOrNoGlow = function() {
+  if (turn % 2 === 0 && gameEnd === false) {
+    startInt = setInterval(function() {
+      playerOneNum.classList.toggle("glowRed")
+    }, 900);
+    playerTwoNum.classList.remove("glowRed")
+  } else if (turn & 2 !== 0 && gameEnd === false) {
+    startInt = setInterval(function() {
+      playerTwoNum.classList.toggle("glowRed")
+    }, 900);
+    playerOneNum.classList.remove("glowRed");
+  } else {
+    playerOneNum.classList.remove("glowRed");
+    playerTwoNum.classList.remove("glowRed")
+  }
+};
+// --- call it on load ---
+glowOrNoGlow();
+
