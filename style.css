@@ -6,17 +6,18 @@
 }
 
 body {
-/*  background-color: #3a3b3d;
-  width: 720px;
-  height: 800px;*/
+  /*background-color: #3a3b3d;*/
+  /*width: 720px;*/
+  /*height: 800px;*/
   /*margin: 20px auto;*/
 
   background: url('muramasaBackgroundBlur.jpg');
   /*-webkit-background-size: auto 100%;*/
   /*-moz-background-size: auto 100%;*/
   /*-o-background-size: auto 100%;*/
-  background-size: 100vh;
-  background-size: 100vw;
+  /*background-size: 100vw;*/
+  /*background-repeat: no-repeat;*/
+  /*background-size: 100vw;*/
 }
 
 header {

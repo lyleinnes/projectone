@@ -8,7 +8,7 @@ var gameEnd = false;
 var kitty = false;
 var activeBoard = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
 var winCombos = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [6, 4, 2]]; 
-var currentPlayer;
+var currentPlayer = playerOne
 var startInt;
 // --- referencing the dom elements we need ---
 var board = document.querySelector(".board-wrapper");
@@ -30,8 +30,8 @@ board.addEventListener("click", function(event) {
   if (event.target.textContent === " " && gameEnd === false) {
     event.target.textContent = currentPlayer;
     activeBoard[index] = currentPlayer;
-    winCombos.forEach(newWinCheck); // -- peow peow --
     turn ++;
+    winCombos.forEach(newWinCheck); // -- peow peow --
     newDrawAlert();
     clearInterval(startInt);
     glowOrNoGlow();
@@ -44,9 +44,9 @@ resetButton.addEventListener("click", function() {
 })
 
 // --- this event listener executes operation kitty ---
-meowButton.addEventListener("click", function() {
-  crazyCat();
-});
+// meowButton.addEventListener("click", function() {
+//   crazyCat();
+// });
 
 // --- newWinCheck function ---
 var newWinCheck = function (array) {
@@ -64,7 +64,7 @@ var newWinCheck = function (array) {
 
 // --- nu drawCheck hu dis? ---
 var newDrawAlert = function () {
-  if (turn === 9 && gameEnd === false || turn === 8 && kitty === true) {
+  if (turn === 9 && gameEnd === false || turn === 9 && kitty === true) {
     winMessage.textContent = "draw";
     winMessage.classList.toggle("unhide");
     gameEnd = true;
@@ -111,6 +111,7 @@ var crazyCat = function() {
     glowOrNoGlow();
     kitty = true;
     newDrawAlert();
+    winCombos.forEach(newWinCheck);
   }
 }
 
