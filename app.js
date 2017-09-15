@@ -64,7 +64,7 @@ var newWinCheck = function (array) {
 
 // --- nu drawCheck hu dis? ---
 var newDrawAlert = function () {
-  if (turn === 9 && gameEnd === false) {
+  if (turn === 9 && gameEnd === false || turn === 8 && kitty === true) {
     winMessage.textContent = "draw";
     winMessage.classList.toggle("unhide");
     gameEnd = true;
@@ -75,7 +75,7 @@ var newDrawAlert = function () {
 var resetGame = function() {
   turn = 0;
   gameEnd = false;
-  activeBoard = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  activeBoard = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
   children.forEach(function(child){
     child.textContent = " ";
   });
@@ -85,13 +85,15 @@ var resetGame = function() {
   if (winMessage.classList.value === "win-message unhide") {
     winMessage.classList.toggle("unhide");
     meow.currentTime=0;
+    // catArray = [];
   }
 };
 
 var meow = new Audio("catSound.wav");
-var catArray = [];
 // --- operation kitty ---
 var crazyCat = function() {
+  turn++
+  var catArray = [];
   if (gameEnd === false && kitty === false) {
     meow.play();
     activeBoard.forEach(function(item, index) {
@@ -99,14 +101,16 @@ var crazyCat = function() {
       if (numItem === index) {
         catArray.push(index);
       }
-    })
-    var randVal = catArray[Math.floor((Math.random() * catArray.length) +1)];
+    });
+    var randVal = catArray[Math.floor(Math.random() * catArray.length)];
     board.children[randVal].innerHTML = "<img src='cat.gif' class='fit' alt='kitty'>";
-    activeBoard[randVal] = "meow";
-    turn ++;
+    activeBoard[randVal] = currentPlayer;
+    // turn ++;
+    turn--
     clearInterval(startInt);
     glowOrNoGlow();
     kitty = true;
+    newDrawAlert();
   }
 }
 

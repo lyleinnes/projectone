@@ -6,20 +6,30 @@
 }
 
 body {
+/*  background-color: #3a3b3d;
   width: 720px;
-  height: 800px;
-  margin: 10px auto;
+  height: 800px;*/
+  /*margin: 20px auto;*/
+
+  background: url('muramasaBackgroundBlur.jpg');
+  /*-webkit-background-size: auto 100%;*/
+  /*-moz-background-size: auto 100%;*/
+  /*-o-background-size: auto 100%;*/
+  background-size: 100vh;
+  background-size: 100vw;
 }
 
 header {
   background: url('finalHeadBG.png');
   background-size: cover;
-  box-sizing: border-box;
-  width: 100%;
-  height: 10%;
+  /*box-sizing: border-box;*/
+  /*width: 100%;*/
+  /*height: 10%;*/
+  margin: 20px auto;
+  width: 720px;
+  height: 80px;
   font-size: 4em;
   text-align: center;
-  margin-bottom: 10px;
   font-family: 'samurai';
   padding-top: 1%;
   border: 3px solid black;
@@ -42,8 +52,11 @@ main {
   background-size: cover;
   box-sizing: border-box;
   position: relative;
-  width: 100%;
-  height: 89%;
+  /*width: 100%;*/
+  /*height: 89%;*/
+  margin: 0 auto;
+  width: 720px;
+  height: 712px;
   border: 3px solid black;
   border-radius: 5px;
 }
@@ -155,17 +168,17 @@ img {
   position: absolute;
   margin-top: 2%;
   left: 22.5%;
-  height: 90%;
+  height: 55.623%;
   width: 55%;
 }
 
 .board-wrapper > div {
   box-sizing: border-box;
   display: inline-block;
-  margin-left: 2.2%;
-  margin-top: 2.2%;
+  margin-left: 2%;
+  margin-top: 2.5%;
   width: 30%;
-  height: 18.54%;
+  height: 30%;
   font-family: 'samurai';
   font-size: 6em;
   text-align: center;
