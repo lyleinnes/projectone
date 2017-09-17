@@ -10,6 +10,7 @@ var activeBoard = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
 var winCombos = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [6, 4, 2]]; 
 var currentPlayer = playerOne
 var startInt;
+var boardIndex;
 // --- referencing the dom elements we need ---
 var board = document.querySelector(".board-wrapper");
 var winMessage = document.querySelector(".win-message");
@@ -21,15 +22,11 @@ var children = board.childNodes;
 
 // --- this event listener [which targets whichever tile the player clicks on] executes everything ---
 board.addEventListener("click", function(event) {
-  var index = event.target.dataset.cell;  // each tile has a unique dataset.cell, which we use to reference the activeBoard
-  if (turn % 2 === 0) {
-    currentPlayer = playerOne;
-  } else {
-    currentPlayer = playerTwo;
-  }
+  var boardIndex = event.target.dataset.cell; //each tile has a unique dataset.cell, which we use to reference the 
+  checkPlayer();
   if (event.target.textContent === " " && gameEnd === false) {
-    event.target.textContent = currentPlayer;
-    activeBoard[index] = currentPlayer;
+    placeMarker();
+    activeBoard[boardIndex] = currentPlayer;
     turn ++;
     winCombos.forEach(newWinCheck); // -- peow peow --
     newDrawAlert();
@@ -44,18 +41,33 @@ resetButton.addEventListener("click", function() {
 })
 
 // --- this event listener executes operation kitty ---
-// meowButton.addEventListener("click", function() {
-//   crazyCat();
-// });
+meowButton.addEventListener("click", function() {
+  crazyCat();
+});
 
-// --- newWinCheck function ---
+//=======================================================
+//                game functions
+//=======================================================
+
+var checkPlayer = function () {
+  if (turn % 2 === 0) {
+    currentPlayer = playerOne;
+  } else {
+    currentPlayer = playerTwo;
+  }
+};
+
+var placeMarker = function () {
+  event.target.textContent = currentPlayer
+};
+
 var newWinCheck = function (array) {
   if (currentPlayer === "x") {
     playerNum = "player one"; 
   } else {
     playerNum = "player two";
   }
-  if (activeBoard[array[0]] === activeBoard[array[1]] && activeBoard[array[0]] === activeBoard[array[2]] && gameEnd === false) {
+  if (activeBoard[array[0]] === activeBoard[array[1]] && activeBoard[array[0]] === activeBoard[array[2]]) {
     winMessage.textContent = playerNum + " wins";
     winMessage.classList.toggle("unhide");
     gameEnd = true;
@@ -64,7 +76,7 @@ var newWinCheck = function (array) {
 
 // --- nu drawCheck hu dis? ---
 var newDrawAlert = function () {
-  if (turn === 9 && gameEnd === false || turn === 9 && kitty === true) {
+  if (turn === 9 && gameEnd === false && kitty === false || turn === 10 && kitty === true) {
     winMessage.textContent = "draw";
     winMessage.classList.toggle("unhide");
     gameEnd = true;
@@ -74,6 +86,7 @@ var newDrawAlert = function () {
 // --- resetGame function ---
 var resetGame = function() {
   turn = 0;
+  kitty = false;
   gameEnd = false;
   activeBoard = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
   children.forEach(function(child){
@@ -81,20 +94,18 @@ var resetGame = function() {
   });
   clearInterval(startInt);
   glowOrNoGlow();
-  kitty = false;
   if (winMessage.classList.value === "win-message unhide") {
     winMessage.classList.toggle("unhide");
     meow.currentTime=0;
-    // catArray = [];
   }
 };
 
 var meow = new Audio("catSound.wav");
 // --- operation kitty ---
 var crazyCat = function() {
-  turn++
   var catArray = [];
   if (gameEnd === false && kitty === false) {
+    turn++
     meow.play();
     activeBoard.forEach(function(item, index) {
       var numItem = parseInt(item);
@@ -105,13 +116,12 @@ var crazyCat = function() {
     var randVal = catArray[Math.floor(Math.random() * catArray.length)];
     board.children[randVal].innerHTML = "<img src='cat.gif' class='fit' alt='kitty'>";
     activeBoard[randVal] = currentPlayer;
-    // turn ++;
-    turn--
+    turn++
     clearInterval(startInt);
     glowOrNoGlow();
     kitty = true;
-    newDrawAlert();
     winCombos.forEach(newWinCheck);
+    newDrawAlert();
   }
 }
 
