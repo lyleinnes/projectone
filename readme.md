@@ -22,7 +22,6 @@ Initially I tried to create the entire game in JS using the console to test as I
 
 I used JS to capture the DOM element which contains all the playable tiles (div's). Adding an event listener to the container element and using event bubbling, each playable tile was now able to be manipulated.
 
-for the first round of styling i had hard coded the measurements of the board which i hadnt really considered until i had finished. in an attempt to make the game easier to scale i went back and re-did the whole css stylesheet and tried to keep the number of individual styles to a minimum.
+For the first round of styling I had hard coded the measurements of the board. In an attempt to make the game easier to scale I went back and re-did the whole css stylesheet and tried to keep the number of individual styles to a minimum as well as converting all size measurements to percentages rather than pixel values.
 
-once i had the game sized the way i wanted, i attempted to add in a 'wildcard' (the 'meow' button) which would make a random move for your opponent and then return to your turn.
-
+Once I had the game working and looking the way I wanted, I attempted to add in a 'wildcard' feature (the 'meow' button). I haven't found a way to make it impactful yet but will return to it later.
